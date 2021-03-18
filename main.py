@@ -16,5 +16,12 @@ result = [x for x in exporting_data if x]
 result = [re.sub('{{Founder_Name: "','',i) for i in result]
 result = [re.sub('"}}','',i) for i in result]
 result = [re.sub('{{INN: "','',i) for i in result]
-print(result)
 
+
+def Convert(a):
+    it = iter(a)
+    res_dct = dict(zip(it, it))
+    return res_dct
+
+
+print(Convert(result))
