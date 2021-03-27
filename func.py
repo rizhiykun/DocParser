@@ -1,26 +1,44 @@
 import glob
 import re
-def Convert(a):
-    it = iter(a)
-    res_dct = dict(zip(it, it))
-    return res_dct
+
+"""
+Function
+"""
+
 
 def cut(exporting_data):
-    result = [x for x in exporting_data if x]
-    result = [re.sub('{{Founder_Name: "', '', i) for i in result]
-    result = [re.sub('"}}', '', i) for i in result]
-    result = [re.sub('{{INN: "', '', i) for i in result]
-    result = [i.lstrip() for i in result]
-    result = [i.rstrip() for i in result]
+    # if list have sublists
+    if all(isinstance(a, list) for a in exporting_data):
+        exporting_data = [item for sublist in exporting_data for item in sublist]
 
-    return result
+    # cut trash from list
+    keys, values, finishedData = [], [], []
+    regex = re.compile(r'(\s\S\w+"|\w+ \w+)')
+
+    for i in range(len(exporting_data)):
+        finishedData.append(regex.findall(exporting_data[i]))
+    cutted = [x for x in finishedData if x]
+    flat_list = [item for sublist in cutted for item in sublist]
 
 
-def pathScan(formt,path):
-    a=[]
-    files = glob.glob (path)
+    # transform to dict
+    for i in range(len(flat_list)):
+
+        a = flat_list[i].strip()
+        a = a.replace('"','')
+        if a.isalnum():
+            values.append(a)
+        else:
+            keys.append(a)
+    db = dict(zip(keys, values))
+    return db
+
+
+def pathScan(formt, path):
+    # path scaner for files
+    gpath = []
+    files = glob.glob(path)
     for i in range(len(files)):
         if files[i].endswith(formt):
-            a.append(files[i])
-    return a
-
+            gpath.append(files[i])
+    return gpath

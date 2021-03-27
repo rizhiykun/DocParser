@@ -1,5 +1,6 @@
 import pylightxl as xl
 import xlrd
+from docx import Document
 
 from func import pathScan, cut
 
@@ -34,6 +35,21 @@ def xls(path):
     exporting_data = cut(exporting_data)
 
     return exporting_data
+
+def docx(path):
+    path = pathScan('docx', path)
+    document = Document(*path)
+    allText = []
+
+    for i in range(len(document.paragraphs)):
+        single_para = document.paragraphs[i]
+        for run in single_para.runs:
+            allText.append(run.text)
+
+    ex = cut(allText)
+    return ex
+
+print(docx('D:\\docs\\template\\ID\\*'))
 
 
 print(xlsx('D:\\docs\\template\\ID\\*'))
