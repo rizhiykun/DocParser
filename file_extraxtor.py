@@ -5,22 +5,26 @@ from docx import Document
 from func import pathScan, cut
 
 
-def xlsx(path):
-    path = pathScan('xlsx', path)
+def xlsx():
+    path = pathScan('xlsx', 'D:\\docs\\template\\ID\\*')
     exporting_data = []
-    xcel_workbook = xl.readxl(fn=path[0])
-    for row in xcel_workbook.ws(ws='Sheet1').rows:
-        exporting_data.append(row)
     result = []
-    for i in range(len(exporting_data)):
-        result.append(list(filter(None, exporting_data[i])))
+    xcel_workbook = xl.readxl(fn=path[0])
+    ws_names = xcel_workbook.ws_names
+    ######
+    for i in range(len(ws_names)):
+        for row in xcel_workbook.ws(ws=ws_names[i]).rows:
+            exporting_data.append(row)
+
+        for i in range(len(exporting_data)):
+            result.append(list(filter(None, exporting_data[i])))
 
     result = cut(result)
     return result
 
 
-def xls(path):
-    path = pathScan('xls', path)
+def xls():
+    path = pathScan('xls', 'D:\\docs\\template\\ID\\*')
     exporting_data = []
     for i in range(len(path)):
         excel_workbook = xlrd.open_workbook(path[i], on_demand=True)
@@ -36,8 +40,8 @@ def xls(path):
 
     return exporting_data
 
-def docx(path):
-    path = pathScan('docx', path)
+def docx():
+    path = pathScan('docx', 'D:\\docs\\template\\ID\\*')
     document = Document(*path)
     allText = []
 

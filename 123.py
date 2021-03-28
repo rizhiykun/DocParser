@@ -1,8 +1,14 @@
 from file_extraxtor import xls, xlsx, docx
-x = xls('D:\\docs\\template\\ID\\*')
-xx = xlsx('D:\\docs\\template\\ID\\*')
-xxx = docx('D:\\docs\\template\\ID\\*')
-for key in x:
-    kk = key,
-    vv= x[key]
-    print(kk, vv)
+#x = xls('D:\\docs\\template\\ID\\*')
+#xx = xlsx('D:\\docs\\template\\ID\\*')
+#xxx = docx('D:\\docs\\template\\ID\\*')
+#for key in xx:
+ #   kk = key,
+  #  vv= xx[key]
+    #print(kk, vv)
+xx = xls()
+xxx = docx()
+xxxx = xlsx()
+x = {**xx, **xxx, **xxxx}
+
+print(x)

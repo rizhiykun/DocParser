@@ -32,7 +32,7 @@ def cut(exporting_data):
         else:
             keys.append(a)
     db = dict(zip(keys, values))
-    return values, keys
+    return db
 
 
 def pathScan(formt, path):
