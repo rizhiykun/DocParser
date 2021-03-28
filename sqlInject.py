@@ -1,22 +1,23 @@
-import collections
 import sqlite3
+import os
 from file_extraxtor import xls, xlsx, docx
 
-a,aa,aaa = xls(),xlsx(),docx()
-allData = {**a, **aa, **aaa}
+allData = {**xls(), **xlsx(), **docx()}
 
 def sqlinject():
+    prj_dir = os.path.abspath(os.path.curdir)
+    base_name= 'database.db'
+    connect = sqlite3.connect(prj_dir + '/' + base_name)
 
-    with sqlite3.connect('database.db') as db:
-        cursor = db.cursor()
+    with sqlite3.connect(base_name) as connect:
+        cursor = connect.cursor()
         cdb = """ CREATE TABLE IF NOT EXISTS customers(name TEXT, inn INTEGER) """
+        cursor.execute(cdb)
 
-        for key in allData:
-            tt = key
-            vv = allData[key]
-            query = """ INSERT INTO customers (name, inn) VALUES(tt, vv) """
+        for (key, values) in allData.items():
+            cursor.execute("INSERT INTO customers (name, inn) VALUES (?, ?)", (key, values))
 
-        cursor.execute(query)
+
 
 
 sqlinject()

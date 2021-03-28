@@ -1,7 +1,6 @@
 import pylightxl as xl
 import xlrd
 from docx import Document
-
 from func import pathScan, cut
 
 
@@ -52,10 +51,3 @@ def docx():
 
     ex = cut(allText)
     return ex
-
-#print(docx('D:\\docs\\template\\ID\\*'))
-
-
-#print(xlsx('D:\\docs\\template\\ID\\*'))
-
-#print(xls('D:\\docs\\template\\ID\\*'))

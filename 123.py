@@ -6,9 +6,7 @@ from file_extraxtor import xls, xlsx, docx
  #   kk = key,
   #  vv= xx[key]
     #print(kk, vv)
-xx = xls()
-xxx = docx()
-xxxx = xlsx()
-x = {**xx, **xxx, **xxxx}
+
+
 
 print(x)

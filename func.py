@@ -2,7 +2,7 @@ import glob
 import re
 
 """
-Function
+Functions
 """
 
 
