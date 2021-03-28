@@ -6,18 +6,16 @@ from func import pathScan, cut
 
 def xlsx():
     path = pathScan('xlsx', 'D:\\docs\\template\\ID\\*')
-    exporting_data = []
-    result = []
-    xcel_workbook = xl.readxl(fn=path[0])
-    ws_names = xcel_workbook.ws_names
-    ######
-    for i in range(len(ws_names)):
-        for row in xcel_workbook.ws(ws=ws_names[i]).rows:
-            exporting_data.append(row)
+    exporting_data, result = [], []
+    xcel_workbook = xl.readxl(fn=path[0]) #open workbook
+    ws_names = xcel_workbook.ws_names     #collect work sheets
 
+    for i in range(len(ws_names)):
+        for row in xcel_workbook.ws(ws=ws_names[i]).rows:   #append data from every rows in every sheets
+            exporting_data.append(row)
+        print(exporting_data)
         for i in range(len(exporting_data)):
             result.append(list(filter(None, exporting_data[i])))
-
     result = cut(result)
     return result
 
@@ -26,8 +24,8 @@ def xls():
     path = pathScan('xls', 'D:\\docs\\template\\ID\\*')
     exporting_data = []
     for i in range(len(path)):
-        excel_workbook = xlrd.open_workbook(path[i], on_demand=True)
-        number_of_sheets = int(len(excel_workbook.sheet_names()))
+        excel_workbook = xlrd.open_workbook(path[i], on_demand=True) #open workbook
+        number_of_sheets = int(len(excel_workbook.sheet_names()))    #collect number of sheets
 
         for i in range(number_of_sheets):
             excel_worksheet = excel_workbook.sheet_by_index(i)
