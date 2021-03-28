@@ -49,9 +49,9 @@ def docx(path):
     ex = cut(allText)
     return ex
 
-print(docx('D:\\docs\\template\\ID\\*'))
+#print(docx('D:\\docs\\template\\ID\\*'))
 
 
-print(xlsx('D:\\docs\\template\\ID\\*'))
+#print(xlsx('D:\\docs\\template\\ID\\*'))
 
-print(xls('D:\\docs\\template\\ID\\*'))
+#print(xls('D:\\docs\\template\\ID\\*'))
